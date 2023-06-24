@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -154,7 +155,9 @@ public class ChatCompletionRequest {
         if (functionCall.equals("auto") || functionCall.equals("none")) {
             this.functionCall = functionCall;
         } else if (functionCall instanceof String) {
-            this.functionCall = Map.of("name", functionCall);
+            HashMap<Object, Object> map = new HashMap<>();
+            map.put("name", functionCall);
+            this.functionCall = map;
         } else {
             this.functionCall = functionCall;
         }
